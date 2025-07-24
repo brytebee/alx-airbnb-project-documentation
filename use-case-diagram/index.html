@@ -1,0 +1,148 @@
+<div class="mermaid">
+  graph LR
+    %% Top Row - Actors and User Management
+    Guest[Guest]
+    subgraph "User Management"
+        UC1[Register as Guest/Host]
+        UC2[Login with Email/Password]
+        UC3[Login with OAuth]
+        UC4[Update Profile]
+        UC5[Upload Profile Photo]
+        UC6[Manage Contact Info]
+    end
+    Host[Host]
+    
+    %% Second Row - Property and Search
+    subgraph "Property Listings Management"
+        UC7[Create Property Listing]
+        UC8[Edit Property Listing]
+        UC9[Delete Property Listing]
+        UC10[Set Property Availability]
+        UC11[Manage Property Amenities]
+    end
+    
+    subgraph "Search and Filtering"
+        UC12[Search Properties by Location]
+        UC13[Filter by Price Range]
+        UC14[Filter by Guest Count]
+        UC15[Filter by Amenities]
+        UC16[Browse Paginated Results]
+    end
+    
+    %% Third Row - Booking and Payment
+    subgraph "Booking Management"
+        UC17[Create Booking]
+        UC18[Cancel Booking]
+        UC19[View Booking Status]
+        UC20[Validate Booking Dates]
+        UC21[Prevent Double Booking]
+    end
+    
+    subgraph "Payment Integration"
+        UC22[Process Guest Payment]
+        UC23[Handle Host Payout]
+        UC24[Support Multiple Currencies]
+        UC25[Manage Payment Security]
+    end
+    
+    %% Fourth Row - Reviews, Notifications, Admin
+    subgraph "Reviews and Ratings"
+        UC26[Leave Property Review]
+        UC27[Rate Property]
+        UC28[Respond to Reviews]
+        UC29[Link Reviews to Bookings]
+    end
+    
+    subgraph "Notifications System"
+        UC30[Send Booking Confirmation]
+        UC31[Send Cancellation Notice]
+        UC32[Send Payment Updates]
+        UC33[Send In-App Notifications]
+    end
+    
+    subgraph "Admin Dashboard"
+        UC34[Monitor Users]
+        UC35[Manage Property Listings]
+        UC36[Track Bookings]
+        UC37[Oversee Payments]
+        UC38[Generate Reports]
+        UC39[Handle Disputes]
+    end
+    
+    Admin[Admin]
+    PaymentGateway[Payment Gateway]
+    EmailService[Email Service]
+    
+    %% Guest Connections
+    Guest --> UC1
+    Guest --> UC2
+    Guest --> UC3
+    Guest --> UC4
+    Guest --> UC5
+    Guest --> UC6
+    Guest --> UC12
+    Guest --> UC13
+    Guest --> UC14
+    Guest --> UC15
+    Guest --> UC16
+    Guest --> UC17
+    Guest --> UC18
+    Guest --> UC19
+    Guest --> UC22
+    Guest --> UC26
+    Guest --> UC27
+    
+    %% Host Connections
+    Host --> UC1
+    Host --> UC2
+    Host --> UC3
+    Host --> UC4
+    Host --> UC5
+    Host --> UC6
+    Host --> UC7
+    Host --> UC8
+    Host --> UC9
+    Host --> UC10
+    Host --> UC11
+    Host --> UC18
+    Host --> UC19
+    Host --> UC23
+    Host --> UC28
+    
+    %% Admin Connections
+    Admin --> UC34
+    Admin --> UC35
+    Admin --> UC36
+    Admin --> UC37
+    Admin --> UC38
+    Admin --> UC39
+    
+    %% System Connections
+    PaymentGateway --> UC22
+    PaymentGateway --> UC23
+    PaymentGateway --> UC24
+    PaymentGateway --> UC25
+    
+    EmailService --> UC30
+    EmailService --> UC31
+    EmailService --> UC32
+    
+    %% Include/Extend Relationships
+    UC17 -.->|includes| UC20
+    UC17 -.->|includes| UC21
+    UC26 -.->|includes| UC29
+    UC27 -.->|includes| UC29
+    UC22 -.->|extends| UC30
+    UC18 -.->|extends| UC31
+    UC23 -.->|extends| UC32
+    
+    %% Styling
+    classDef actor fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef usecase fill:#f3e5f5,stroke:#4a148c,stroke-width:1px
+    classDef system fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    
+    class Guest,Host,Admin actor
+    class PaymentGateway,EmailService system
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
